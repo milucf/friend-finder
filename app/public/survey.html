@@ -43,11 +43,11 @@
                 var questhtml = "";
                 for (var i = 0; i < quest.length; i++) {
                     questTitle = "<h4>" + quest[i] + "</h4>";
-                    option1 = " <input type=\"radio\" name=\"q" + i + "options\" value=\"1\" > 1 <br>";
+                    option1 = " <input type=\"radio\" name=\"q" + i + "options\" value=\"1\" > 1(Strongly Disagree) <br>";
                     option2 = " <input type=\"radio\" name=\"q" + i + "options\" value=\"2\" > 2 <br>";
                     option3 = " <input type=\"radio\" name=\"q" + i + "options\" value=\"3\" > 3 <br>";
                     option4 = " <input type=\"radio\" name=\"q" + i + "options\" value=\"4\" > 4 <br>";
-                    option5 = " <input type=\"radio\" name=\"q" + i + "options\" value=\"5\" > 5 <br>";
+                    option5 = " <input type=\"radio\" name=\"q" + i + "options\" value=\"5\" > 5(Strongly Agree) <br>";
                     questhtml = questhtml + questTitle + "<div style=\"padding-left:20px\">" + option1 + option2 + option3 + option4 + option5 + "</div>";
                 }
 
