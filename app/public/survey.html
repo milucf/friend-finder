@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Survey</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var userName="";
+            var userPhoto="";
+            $("#myModal1").modal({ backdrop: "static" });
+            questGenerator();
+            $(".matchPanel").hide();
+            $("#btnSignup").on("click", function () {
+                if ($("#usrName").val().trim().length > 0) {
+                    userName=$("#usrName").val();
+                    userPhoto=$("#usrPhoto").val();
+                    $("#currentUser").html(" | <b>Hello "+userName+"</b>");
+                    $("#myModal1").modal("hide");
+                }
+                else {
+                    $("#alrt1").html("<span class=\"alert alert-danger\">please enter a name!</span>")
+                }
+
+            });
+
+            function questGenerator() {
+                var quest = ["Your mind is always buzzing with unexplored ideas and plans.", "Generally speaking, you rely more on your experience than your imagination.", "You find it easy to stay relaxed and focused even when there is some pressure.", "You rarely do something just out of sheer curiosity.", "People can rarely upset you.",
+                    "It is often difficult for you to relate to other people’s feelings.", "In a discussion, truth should be more important than people’s sensitivities.", "You rarely get carried away by fantasies and ideas.", "You think that everyone’s views should be respected regardless of whether they are supported by facts or not.", "You feel more energetic after spending time with a group of people.",];
+                var questTitle;
+                var option1, option2, option3, option4, option5
+                var questhtml = "";
+                for (var i = 0; i < quest.length; i++) {
+                    questTitle = "<h4>" + quest[i] + "</h4>";
+                    option1 = " <input type=\"radio\" name=\"q" + i + "options\" value=\"1\" > 1 <br>";
+                    option2 = " <input type=\"radio\" name=\"q" + i + "options\" value=\"2\" > 2 <br>";
+                    option3 = " <input type=\"radio\" name=\"q" + i + "options\" value=\"3\" > 3 <br>";
+                    option4 = " <input type=\"radio\" name=\"q" + i + "options\" value=\"4\" > 4 <br>";
+                    option5 = " <input type=\"radio\" name=\"q" + i + "options\" value=\"5\" > 5 <br>";
+                    questhtml = questhtml + questTitle + "<div style=\"padding-left:20px\">" + option1 + option2 + option3 + option4 + option5 + "</div>";
+                }
+
+                $("#questions").html(questhtml);
+            }
+
+          $("#btnSubmit").on("click",function() {
+
+                var urlQuery=""
+                if(window.location.href.lastIndexOf("?g=")>0)
+                var urlQuery=window.location.href.substring(window.location.href.lastIndexOf("?g=")+3);
+
+                var answers = []
+                for (i = 0; i < 10; i++) {
+                    if ($(":radio[name=q" + i + "options]:checked").val() == undefined) {
+
+                          $("#alrt2").html("<span class=\"alert alert-danger\">please answer all questios</span>"); return;
+                    }
+                    answers.push($(":radio[name=q" + i + "options]:checked").val());
+                };
+
+                var friendUser = { name: userName,photo:userPhoto, scores: answers };
+
+                $.post("/api/friends/"+urlQuery, friendUser, function (data) {
+                    $(".content").hide();
+                    $(".matchPanel").show();
+                    var header="<h1>You are matched with</h1>";
+                    var fimg="<img src=\""+data.photo+"\" >";
+                    var fname="<h3>"+data.name+"</h3>";
+                    $(".matchPanel").html(header+fimg+fname);
+                });
+            });
+        });
+    </script>
+    <style>
+        body {
+            background-color: #335;
+        }
+        header {
+            height: 60px;
+            background-color: #fff;
+            padding: 10px 25px;
+        }
+        header .logo {
+            margin: 0px;
+            font-family: cursive;
+            color: #0af;
+            width: 50%;
+            float: left;
+            font-size: 28px;
+        }
+        .content {
+            background-color: #eee;
+            padding: 50px;
+        }
+        .matchPanel{
+            background-color:#eee;
+            text-align:center;
+            padding: 200px 50px;
+        }
+         header a {
+            font-size: 12px;
+            color: #000;
+        }
+         footer {
+            background-color: #2f2f2f;
+            color: #ffffff;
+            padding: 50px;
+            font-size: 10px;
+        }
+   @media only screen and (max-width: 768px) {
+     header{
+         height: 100px;
+     }
+         header .logo {
+            width: 100%;
+        }
+}
+    </style>
+</head>
+
+<body>
+        <header>
+        <span> 
+           <div class="logo">
+               Friend<span class="glyphicon glyphicon-heart"></span> Finder <span class="glyphicon glyphicon-search"></span>
+        </div>
+        </span>
+
+        <div style="float:right;min-width:10px;padding-top:10px;">
+            <a href="/api/friends">Friends api</a> |
+             <a href="/">home</a>
+             <span id="currentUser"></span>
+        </div>
+    </header>
+    <div class="container">
+        <div class="content">
+            <div id="questions"></div>
+            <br>
+              <span id="alrt2"></span>
+            <button id="btnSubmit">submit</button>
+        </div>
+    </div>
+    <!-- Match Panel -->
+     <div  class="matchPanel"></div>
+    <!-- Modal -->
+    <div id="myModal1" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <button type="button" class="close" data-dismiss="modal">×</button>-->
+                    <h4 class="modal-title">Please Sign UP</h4>
+                </div>
+                <div class="modal-body">
+
+                    <p>
+                        <div class="form-group">
+                            <label for="usr">Name:</label>
+                            <input type="text" class="form-control" id="usrName">
+                            <label for="usr">Link to Photo(optional):</label>
+                            <input type="text" class="form-control" id="usrPhoto">
+                        </div>
+                    </p>
+
+                </div>
+                <div class="modal-footer">
+                    <span id="alrt1"></span>
+                    <button type="button" class="btn btn-default" id="btnSignup">Sign In</button>
+                </div>
+            </div>
+        </div></div>
+
+
+<footer class="container-fluid bg-4 text-center">
+  <p>powered by milucf<br> <a href="/api/frineds">friends api</a></p> 
+</footer>
+
+</body>
+
+</html>

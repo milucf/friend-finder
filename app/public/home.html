@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            ageSelectionOptions();
+
+            function ageSelectionOptions() {
+                optionStr = "";
+                for (var i = 18; i < 100; i++)
+                    optionStr = optionStr + "<option>" + i + "</option>";
+
+                document.getElementById("friendAge1").innerHTML = optionStr;
+                document.getElementById("friendAge2").innerHTML = optionStr;
+                document.getElementById("friendAge1").selectedIndex = 0;
+                document.getElementById("friendAge2").selectedIndex = 42;
+            }
+
+            $(".btn-primary").on("click", function () {
+                window.location.href = window.location.origin + "/survey?g=" + $("#friendGenderSel :selected").text();
+            });
+        });
+    </script>
+
+    <style>
+        body {
+            background-color: #222;
+            background-image: url("homeimg.jpg");
+        }
+
+        header {
+            height: 60px;
+            background-color: #eee;
+            padding: 10px 25px;
+        }
+
+        header .logo {
+            margin: 0px;
+            font-family: cursive;
+            color: #0af;
+            width: 50%;
+            float: left;
+            font-size: 28px;
+        }
+
+        .survey-panel {
+            margin: 100px 100px;
+            opacity: .85;
+        }
+
+        .survey-info {
+            text-align: center;
+            padding: 40px 0px;
+        }
+
+        header a {
+            font-size: 12px;
+            color: #000;
+        }
+
+
+ @media only screen and (max-width: 768px) {
+     header{
+         height: 100px;
+     }
+         header .logo {
+            width: 100%;
+        }
+      .survey-panel {
+            width: 80%;
+            margin: 100px auto;
+            opacity: .85;
+            float: none;
+        }
+
+        .survey-info {
+            text-align: center;
+            padding: 40px 0px;
+        }
+}
+    </style>
+</head>
+
+<body>
+    <header>
+        <span> 
+           <div class="logo">
+               Friend<span class="glyphicon glyphicon-heart"></span> Finder <span class="glyphicon glyphicon-search"></span>
+        </div>
+        </span>
+
+        <div style="float:right;min-width:10px;padding-top:10px;">
+            <a href="/api/friends">Friends api</a>
+        </div>
+    </header>
+    <div class="row">
+        <div class="col-md-6">
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-info survey-panel">
+                <div class="panel-heading">
+                    Find the friend with the greatest compatibility!               
+                </div>
+                <div class="panel-body  survey-info">
+
+                    <div class="form-inline">
+
+                        <div class="form-group">
+                            <label for="userGenderSel">I am a </label>
+                            <select class="form-control" id="userGenderSel">
+                 <option>Man</option>
+                 <option  selected="selected">Woman</option>
+                </select>
+                            <label for="friendGenderSel">seeking a </label>
+                            <select class="form-control" id="friendGenderSel">
+                 <option  selected="selected">Man</option>
+                 <option >Woman</option>
+                </select>
+                        </div>
+
+                        <br><br>
+
+                        <div class="form-group">
+                            <label for="friendAge1">Age </label>
+                            <select class="form-control" id="friendAge1">
+                      </select>
+                            <label for="friendAge2">to</label>
+                            <select class="form-control" id="friendAge2">
+                     </select>
+                        </div>
+
+                        <br><br>
+
+                        <div class="form-group">
+                            <label for="location">Location/Zipcode</label>
+                            <input type="text" class="form-control" id="location">
+                        </div>
+
+                        <br><br>
+
+                        <button type="button" class="btn btn-primary">Go To Survey</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

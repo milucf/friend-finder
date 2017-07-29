@@ -1,0 +1,118 @@
+
+
+function scoreGenerator(){
+    rndScore=[];
+    for(i=0;i<10;i++)
+        rndScore.push(Math.floor(Math.random()*5+1));
+
+    return rndScore;
+}
+
+var friends={
+     females:[
+    {
+        name:"vanessa",
+        photo:"https://randomuser.me/api/portraits/women/28.jpg",
+        scores:scoreGenerator()
+    },
+        {
+        name:"zoey",
+        photo:"https://randomuser.me/api/portraits/women/76.jpg",
+        scores:scoreGenerator()
+    },
+        {
+        name:"junilvana",
+        photo:"https://randomuser.me/api/portraits/women/68.jpg",
+        scores:scoreGenerator()
+    },
+        {
+        name:"cassandre",
+        photo:"https://randomuser.me/api/portraits/women/65.jpg",
+        scores:scoreGenerator()
+    },
+        {
+        name:"donna",
+        photo:"https://randomuser.me/api/portraits/women/90.jpg",
+        scores:scoreGenerator()
+    },
+        {
+        name:"penny",
+        photo:"https://randomuser.me/api/portraits/women/44.jpg",
+        scores:scoreGenerator()
+    },
+        {
+        name:"heidi",
+        photo:"https://randomuser.me/api/portraits/women/44.jpg",
+        scores:scoreGenerator()
+    },
+        {
+        name:"katie",
+        photo:"https://randomuser.me/api/portraits/women/43.jpg",
+        scores:scoreGenerator()
+    },
+        {
+        name:"zeilane",
+        photo:"https://randomuser.me/api/portraits/women/93.jpg",
+        scores:scoreGenerator()
+    },
+    {
+        name:"elzira",
+        photo:"https://randomuser.me/api/portraits/women/3.jpg",
+        scores:scoreGenerator()
+    }
+],
+males:[
+    {
+        name:"morten",
+        photo:"https://randomuser.me/api/portraits/men/61.jpg",
+        scores:scoreGenerator()
+    },
+        {
+        name:"julian",
+        photo:"https://randomuser.me/api/portraits/men/38.jpg",
+        scores:scoreGenerator()
+    },
+        {
+        name:"bruce",
+        photo:"https://randomuser.me/api/portraits/men/84.jpg",
+        scores:scoreGenerator()
+    },
+        {
+        name:"emil",
+        photo:"https://randomuser.me/api/portraits/men/29.jpg",
+        scores:scoreGenerator()
+    },
+        {
+        name:"noe",
+        photo:"https://randomuser.me/api/portraits/men/72.jpg",
+        scores:scoreGenerator()
+    },
+        {
+        name:"corey",
+        photo:"https://randomuser.me/api/portraits/men/4.jpg",
+        scores:scoreGenerator()
+    },
+        {
+        name:"macit",
+        photo:"https://randomuser.me/api/portraits/men/68.jpg",
+        scores:scoreGenerator()
+    },
+        {
+        name:"emile",
+        photo:"https://randomuser.me/api/portraits/men/94.jpg",
+        scores:scoreGenerator()
+    },
+        {
+        name:"mathias",
+        photo:"https://randomuser.me/api/portraits/men/55.jpg",
+        scores:scoreGenerator()
+    },
+        {
+        name:"elliot",
+        photo:"https://randomuser.me/api/portraits/men/53.jpg",
+        scores:scoreGenerator()
+    }
+]
+};
+
+module.exports=friends;
